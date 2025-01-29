@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hood Python Interpreter</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #code {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 10px;
+            font-family: monospace;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #output {
+            width: 100%;
+            min-height: 100px;
+            background-color: #f8f8f8;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .example {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hood Python Interpreter</h1>
+        <p>Write your Hood Python code below and run it!</p>
+        
+        <textarea id="code" placeholder="Enter your Hood Python code here...">finna say_wassup(name) fr_fr
+    yo(f"Ay yo wassup {name}!")
+
+say_wassup("G")</textarea>
+        
+        <button onclick="runCode()">Run Code</button>
+        
+        <h3>Output:</h3>
+        <div id="output"></div>
+
+        <div class="example">
+            <h3>Quick Reference:</h3>
+            <pre>
+yo = print
+finna = def
+squad = class
+fr_fr = :
+facts = True
+cap = False
+check_it = if
+else_tho = else
+keep_it_100 = while
+straight_up = for
+in_the_cut = in</pre>
+        </div>
+    </div>
+
+    <script>
+        function runCode() {
+            const code = document.getElementById('code').value;
+            const outputDiv = document.getElementById('output');
+            
+            fetch('/run_code', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ code: code })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    outputDiv.textContent = data.output;
+                    outputDiv.style.color = 'black';
+                } else {
+                    outputDiv.textContent = 'Error: ' + data.error;
+                    outputDiv.style.color = 'red';
+                }
+            })
+            .catch(error => {
+                outputDiv.textContent = 'Error: ' + error;
+                outputDiv.style.color = 'red';
+            });
+        }
+    </script>
+</body>
+</html>
