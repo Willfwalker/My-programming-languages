@@ -108,37 +108,3 @@ class FortniteScript {
   `;
   
   fortScript.interpret(exampleCode);
-
-// Create HTML interface and handling code
-function createFortniteInterface() {
-    const container = document.createElement('div');
-    container.innerHTML = `
-        <div style="max-width: 800px; margin: 20px auto; padding: 20px;">
-            <h2>Fortnite Script Editor</h2>
-            <textarea id="codeInput" rows="10" cols="50" style="width: 100%; margin-bottom: 10px;"
-                placeholder="Enter your Fortnite code here...
-Example:
-drop shield_potion with 100
-drop mini_shields with 25
-shield shield_potion"></textarea>
-            <button id="runCode" style="padding: 10px 20px;">Run Code</button>
-            <div id="output" style="margin-top: 20px; padding: 10px; background-color: #f0f0f0; white-space: pre-wrap;"></div>
-        </div>
-    `;
-
-    document.body.appendChild(container);
-
-    const fortScript = new FortniteScript();
-    const runButton = document.getElementById('runCode');
-    const outputDiv = document.getElementById('output');
-    const codeInput = document.getElementById('codeInput');
-
-    runButton.addEventListener('click', () => {
-        fortScript.reset();
-        fortScript.interpret(codeInput.value);
-        outputDiv.textContent = fortScript.getOutput();
-    });
-}
-
-// Initialize the interface when the page loads
-document.addEventListener('DOMContentLoaded', createFortniteInterface);
