@@ -1,130 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Fortnite Script Editor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortnite Script Interpreter</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-        }
-        .documentation {
+            font-family: 'Arial', sans-serif;
             max-width: 800px;
-            margin: 40px auto;
+            margin: 0 auto;
             padding: 20px;
-            background-color: #f8f9fa;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
             border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .documentation h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-        .documentation h3 {
-            color: #e74c3c;
-            margin-top: 20px;
-        }
-        code {
-            background-color: #eee;
-            padding: 2px 5px;
-            border-radius: 3px;
+        #code {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 10px;
             font-family: monospace;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
-        pre {
-            background-color: #2c3e50;
-            color: #fff;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
+        #output {
+            width: 100%;
+            min-height: 100px;
+            background-color: #f8f8f8;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .example {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
-    <script src="fortnite.js"></script>
+    <div class="container">
+        <h1>Fortnite Script Interpreter</h1>
+        <p>Write your Fortnite code below and run it!</p>
+        
+        <textarea id="code" placeholder="Enter your Fortnite code here...">drop shield_potion with 100
+shield shield_potion</textarea>
+        
+        <button onclick="runCode()">Run Code</button>
+        
+        <h3>Output:</h3>
+        <div id="output"></div>
 
-    <div class="documentation">
-        <h2>Fortnite Script Documentation</h2>
+        <div class="example">
+            <h3>Quick Reference:</h3>
+            <pre>
+Commands:
+drop [variable] with [value]    - Create a variable (e.g., drop shield_potion with 100)
+shield [value]                  - Print a value (e.g., shield "Hello World")
+eliminate [variable]            - Delete a variable (e.g., eliminate shield_potion)
+storm [condition] then          - If statement (e.g., storm shield_potion > 50 then)
 
-        <h3>Current Commands</h3>
-        <h4>1. drop - Declares or assigns variables</h4>
-        <p>Syntax: <code>drop variableName with value</code></p>
-        <pre>
-drop health with 100
-drop name with "Player"</pre>
-
-        <h4>2. shield - Prints/outputs values</h4>
-        <p>Syntax: <code>shield value</code></p>
-        <pre>
-shield health
-shield "Hello World"
-shield 42</pre>
-
-        <h4>3. eliminate - Deletes variables</h4>
-        <p>Syntax: <code>eliminate variableName</code></p>
-        <pre>eliminate health</pre>
-
-        <h4>4. storm - Conditional statements (partially implemented)</h4>
-        <p>Syntax: <code>storm condition then</code></p>
-        <pre>storm health > 50 then</pre>
-
-        <h3>Supported Operations</h3>
-        <p>Mathematical Operations:</p>
-        <ul>
-            <li><code>+</code> (Addition)</li>
-            <li><code>-</code> (Subtraction)</li>
-            <li><code>*</code> (Multiplication)</li>
-            <li><code>/</code> (Division)</li>
-        </ul>
-        <pre>
-drop damage with 50
-drop armor with 0.8
-drop final_damage with damage * armor</pre>
-
-        <h3>Syntax Rules</h3>
-        <h4>Variable names:</h4>
-        <ul>
-            <li>Must start with a letter</li>
-            <li>Can contain letters, numbers, and underscores</li>
-            <li>Are case-sensitive</li>
-        </ul>
-
-        <h4>Values can be:</h4>
-        <ul>
-            <li>Numbers (integers or decimals)</li>
-            <li>Strings (with or without quotes)</li>
-            <li>Mathematical expressions</li>
-            <li>References to other variables</li>
-        </ul>
-
-        <h3>Example Code</h3>
-        <pre>
-// Basic Variables and Math
-drop health with 100
-drop damage with 25
-drop remaining_health with health - damage
-shield remaining_health  // Shows 75
-
-// Multiple Operations
-drop shield with 50
-drop total_protection with health + shield
-shield total_protection  // Shows 150
-
-// Variable Management
-drop potion with 50
-shield potion  // Shows 50
-eliminate potion
-drop potion with 25
-shield potion  // Shows 25</pre>
-
-        <h3>Future Potential Commands</h3>
-        <ul>
-            <li><code>dance</code> (loops)</li>
-            <li><code>squad</code> (functions)</li>
-            <li><code>revive</code> (try/catch)</li>
-            <li><code>build</code> (arrays/objects)</li>
-            <li><code>rotate</code> (for loops)</li>
-        </ul>
+Examples:
+drop shield_potion with 100
+drop mini_shields with 25
+shield shield_potion
+eliminate shield_potion
+storm mini_shields > 20 then</pre>
+        </div>
     </div>
+
+    <script src="fortnite.js"></script>
+    <script>
+        const interpreter = new FortniteScript();
+        
+        function runCode() {
+            const code = document.getElementById('code').value;
+            const outputDiv = document.getElementById('output');
+            
+            try {
+                interpreter.reset();
+                interpreter.interpret(code);
+                outputDiv.textContent = interpreter.getOutput();
+                outputDiv.style.color = 'black';
+            } catch (error) {
+                outputDiv.textContent = 'Error: ' + error;
+                outputDiv.style.color = 'red';
+            }
+        }
+    </script>
 </body>
-</html> 
+</html>
